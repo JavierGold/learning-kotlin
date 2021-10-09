@@ -17,16 +17,16 @@ class MainActivity : AppCompatActivity() {
             val bio = binding.bioEdit.text.toString()
             val power=binding.powerBar.rating
 
-            openDetailActivity(superheroName,alterEgo,bio,power)
+            val hero =Superhero(superheroName,alterEgo,bio,power)
+
+            openDetailActivity(hero)
         }
     }
 
-    private fun openDetailActivity(superheroName:String, alterEgo:String,bio:String,power: Float){
+    private fun openDetailActivity(superhero:Superhero){
         val intent = Intent(this,DetailActivity::class.java)
-        intent.putExtra("superhero_name",superheroName)
-        intent.putExtra("alter_Ego",alterEgo)
-        intent.putExtra("bio",bio)
-        intent.putExtra("power",power)
+        intent.putExtra("superhero",superhero)
+
         startActivity(intent)
     }
 }
