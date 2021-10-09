@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private fun openDetailActivity(superhero:Superhero){
         val intent = Intent(this,DetailActivity::class.java)
         intent.putExtra("superhero",superhero)
+        //a huevo
 
         startActivity(intent)
     }
