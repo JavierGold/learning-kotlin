@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,9 +18,15 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener{
             val ageString = ageEdit.text.toString()
-            val ageInt = ageString.toInt()
-            val result = ageInt * 7
-            resultText.text= "Tu edad canina es de $result años"
+            if (ageString.isNotEmpty()){
+                val ageInt = ageString.toInt()
+                val result = ageInt * 7
+                resultText.text= "Tu edad canina es de $result años"
+            } else{
+                Toast.makeText(this,"Debes insertar tu edad",Toast.LENGTH_SHORT).show()
+
+            }
+
         }
 
     }

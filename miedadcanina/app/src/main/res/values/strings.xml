@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mi-edad-canina</string>
+    <string name="how_old_are_you">Cuántos años tienes?</string>
 </resources>

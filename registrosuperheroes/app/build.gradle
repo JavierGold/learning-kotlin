@@ -1,15 +1,15 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.mi_edad_canina"
-        minSdk 26
+        applicationId "com.example.registro_superheroes"
+        minSdk 19
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -31,7 +31,9 @@ android {
         jvmTarget = '1.8'
     }
 
-
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
