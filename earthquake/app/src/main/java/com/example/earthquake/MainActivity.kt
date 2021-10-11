@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.eqRecycler.layoutManager = LinearLayoutManager(this)
+
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         val adapter = EqAdapter()
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        
+
         adapter.onItemClickListener = {
             Toast.makeText(this, it.place, Toast.LENGTH_SHORT).show()
         }
