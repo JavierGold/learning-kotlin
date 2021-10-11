@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.earthquake.databinding.ActivityMainBinding
 
@@ -14,25 +16,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.eqRecycler.layoutManager = LinearLayoutManager(this)
-
-        val eqList = mutableListOf<Earthquake>()
-
-        eqList.add(Earthquake("1","57 km E of NY",4.3,273845126,-102.4756,28.47365))
-        eqList.add(Earthquake("2","80 km E of NJ",4.6,273845126,-102.4756,28.47365))
-        eqList.add(Earthquake("3","78 km E of YN",4.4,273845126,-102.4756,28.47365))
+        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         val adapter = EqAdapter()
         binding.eqRecycler.adapter = adapter
-        adapter.submitList(eqList)
 
+        viewModel.eqList.observe(this, Observer {
+            eqList->
+            adapter.submitList(eqList)
+
+            if (eqList.isEmpty()){
+                binding.eqEmptyView.visibility = View.VISIBLE
+            }else{
+                binding.eqEmptyView.visibility = View.GONE
+            }
+        })
+
+        
         adapter.onItemClickListener = {
             Toast.makeText(this, it.place, Toast.LENGTH_SHORT).show()
         }
 
-        if (eqList.isEmpty()){
-            binding.eqEmptyView.visibility = View.VISIBLE
-        }else{
-            binding.eqEmptyView.visibility = View.GONE
-        }
+
+
     }
 }
