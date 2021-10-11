@@ -1,6 +1,7 @@
 package com.example.earthquake
 
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ class EqAdapter : ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
         }
     }
 
+    lateinit var onItemClickListener: (Earthquake) -> Unit
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EqViewHolder {
         val binding = EqListItemBinding.inflate(LayoutInflater.from(parent.context))
 
@@ -39,6 +42,14 @@ class EqAdapter : ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
         fun bind(earthquake: Earthquake){
             binding.eqMagnitude.text=earthquake.magnitude.toString()
             binding.eqPlaceText.text=earthquake.place
+            binding.root.setOnClickListener{
+                if(::onItemClickListener.isInitialized){
+                    onItemClickListener(earthquake)
+                }else{
+
+                }
+
+            }
         }
     }
 
