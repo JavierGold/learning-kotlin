@@ -17,11 +17,7 @@ class MainRepository(private val database: EqDatabase) {
         return withContext(Dispatchers.IO){
             val eqJsonResponse = service.getLastHourEarthquakes()
             val eqList =  parseEqResult(eqJsonResponse)
-
             database.eqDao.insertAll(eqList)
-
-
-
         }
     }
 
