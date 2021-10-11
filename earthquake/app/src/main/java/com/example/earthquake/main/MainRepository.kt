@@ -1,5 +1,6 @@
 package com.example.earthquake.main
 
+import androidx.lifecycle.LiveData
 import androidx.room.RoomDatabase
 import com.example.earthquake.Earthquake
 import com.example.earthquake.api.EqJsonResponse
@@ -9,11 +10,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MainRepository(private val database: EqDatabase) {
-     suspend fun fetchEarthquakes(): MutableList<Earthquake> {
+
+    val eqList: LiveData<MutableList<Earthquake>> =database.eqDao.getEarthquakes()
+
+     suspend fun fetchEarthquakes() {
         return withContext(Dispatchers.IO){
             val eqJsonResponse = service.getLastHourEarthquakes()
             val eqList =  parseEqResult(eqJsonResponse)
-            eqList
+
+            database.eqDao.insertAll(eqList)
+
+
 
         }
     }
