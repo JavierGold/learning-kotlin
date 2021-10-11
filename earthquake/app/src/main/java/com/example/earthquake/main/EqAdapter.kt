@@ -1,18 +1,15 @@
-package com.example.earthquake
+package com.example.earthquake.main
 
-import android.content.Context
-import android.content.DialogInterface
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.earthquake.Earthquake
 import com.example.earthquake.databinding.EqListItemBinding
 
 
-class EqAdapter : ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
+class EqAdapter : ListAdapter<Earthquake, EqAdapter.EqViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<Earthquake>() {
         override fun areItemsTheSame(oldItem: Earthquake, newItem: Earthquake): Boolean {

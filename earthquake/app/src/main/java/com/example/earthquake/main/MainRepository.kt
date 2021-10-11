@@ -1,5 +1,8 @@
-package com.example.earthquake
+package com.example.earthquake.main
 
+import com.example.earthquake.Earthquake
+import com.example.earthquake.api.EqJsonResponse
+import com.example.earthquake.api.service
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

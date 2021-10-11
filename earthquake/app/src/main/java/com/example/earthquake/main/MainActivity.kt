@@ -1,4 +1,4 @@
-package com.example.earthquake
+package com.example.earthquake.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
