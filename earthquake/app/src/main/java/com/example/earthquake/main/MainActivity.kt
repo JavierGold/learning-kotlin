@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.earthquake.api.ApiResponseStatus
 import com.example.earthquake.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+
+        viewModel.status.observe(this, Observer {
+            apiResponseStatus ->
+            if (apiResponseStatus == ApiResponseStatus.LOADING){
+                binding.loadingWheel.visibility= View.VISIBLE
+            }else if(apiResponseStatus == ApiResponseStatus.DONE){
+                binding.loadingWheel.visibility= View.GONE
+            }else if(apiResponseStatus == ApiResponseStatus.ERROR){
+                binding.loadingWheel.visibility= View.GONE
+            }
+        })
 
         adapter.onItemClickListener = {
             Toast.makeText(this, it.place, Toast.LENGTH_SHORT).show()
