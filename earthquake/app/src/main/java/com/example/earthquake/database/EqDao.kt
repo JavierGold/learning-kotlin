@@ -10,6 +10,7 @@ import com.example.earthquake.Earthquake
 
 @Dao
 interface EqDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(earthquakes: MutableList<Earthquake>)
 
