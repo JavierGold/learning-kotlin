@@ -1,18 +1,18 @@
 package com.example.earthquake.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.earthquake.Earthquake
+import com.example.earthquake.database.getDatabase
 import kotlinx.coroutines.*
 
-class MainViewModel: ViewModel() {
+class MainViewModel(application: Application): AndroidViewModel(application) {
     private var _eqList = MutableLiveData<MutableList<Earthquake>>()
     val eqList: LiveData<MutableList<Earthquake>>
         get() = _eqList
 
-    private val repository = MainRepository()
+    private val database = getDatabase(application)
+    private val repository = MainRepository(database)
 
     init {
         viewModelScope.launch {
