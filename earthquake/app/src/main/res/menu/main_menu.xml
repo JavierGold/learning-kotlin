@@ -7,7 +7,7 @@
         android:title="Sort by magnitude"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_warning_white"/>
-    
+
     <item
         android:id="@+id/main_menu_sort_time"
         android:title="Sort by time"

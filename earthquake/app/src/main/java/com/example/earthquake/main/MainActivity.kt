@@ -2,15 +2,20 @@ package com.example.earthquake.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.earthquake.R
 import com.example.earthquake.api.ApiResponseStatus
 import com.example.earthquake.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -18,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.eqRecycler.layoutManager = LinearLayoutManager(this)
 
-        val viewModel = ViewModelProvider(this,MainViewModelFactory(application)).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this,MainViewModelFactory(application)).get(MainViewModel::class.java)
 
         val adapter = EqAdapter()
         binding.eqRecycler.adapter = adapter
@@ -50,7 +55,21 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, it.place, Toast.LENGTH_SHORT).show()
         }
 
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val itemId = item.itemId
+        if(itemId== R.id.main_menu_sort_magnitude){
+            viewModel.reloadEarthquakesFromDb(true)
+
+        }else if(itemId== R.id.main_menu_sort_time){
+            viewModel.reloadEarthquakesFromDb(false)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
