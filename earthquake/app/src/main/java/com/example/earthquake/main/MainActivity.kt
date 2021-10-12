@@ -23,7 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.eqRecycler.layoutManager = LinearLayoutManager(this)
 
-        viewModel = ViewModelProvider(this,MainViewModelFactory(application)).get(MainViewModel::class.java)
+        val sortType = getSortType()
+
+        viewModel = ViewModelProvider(this,
+            MainViewModelFactory(application,sortType)).get(MainViewModel::class.java)
 
         val adapter = EqAdapter()
         binding.eqRecycler.adapter = adapter
@@ -57,6 +60,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun getSortType(): Boolean {
+        val prefs = getPreferences(MODE_PRIVATE)
+        return prefs.getBoolean("sort_type", false)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu,menu)
         return true
@@ -66,10 +74,18 @@ class MainActivity : AppCompatActivity() {
         val itemId = item.itemId
         if(itemId== R.id.main_menu_sort_magnitude){
             viewModel.reloadEarthquakesFromDb(true)
-
+            saveSortType(true)
         }else if(itemId== R.id.main_menu_sort_time){
             viewModel.reloadEarthquakesFromDb(false)
+            saveSortType(false)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveSortType(sortByMagnitude:Boolean){
+        val prefs = getPreferences(MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putBoolean("sort_type" , sortByMagnitude)
+        editor.apply()
     }
 }
