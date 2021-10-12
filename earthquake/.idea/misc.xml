@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/kotlin_ejercicios/earthquake/app/src/main/res/drawable/ic_chevron_right_black_black.xml" value="0.25833333333333336" />
+        <entry key="..\:/kotlin_ejercicios/earthquake/app/src/main/res/drawable/ic_history_white.xml" value="0.25833333333333336" />
         <entry key="..\:/kotlin_ejercicios/earthquake/app/src/main/res/layout/activity_main.xml" value="0.2421875" />
         <entry key="..\:/kotlin_ejercicios/earthquake/app/src/main/res/layout/eq_list_item.xml" value="0.4" />
+        <entry key="..\:/kotlin_ejercicios/earthquake/app/src/main/res/menu/main_menu.xml" value="0.2421875" />
       </map>
     </option>
   </component>
